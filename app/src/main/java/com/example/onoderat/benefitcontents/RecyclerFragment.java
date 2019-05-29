@@ -1,10 +1,12 @@
 package com.example.onoderat.benefitcontents;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +27,25 @@ public class RecyclerFragment extends Fragment implements OnRecyclerListener {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (!(activity instanceof RecyclerFragmentListener)) {
-            throw new UnsupportedOperationException(
-                    "Listener is not Implementation.");
-        } else {
-            mFragmentListener = (RecyclerFragmentListener) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (mFragmentListener == null){
+            mFragmentListener = (RecyclerFragmentListener) context;
         }
-        mActivity = activity;
+        mActivity = (Activity) context;
     }
+
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        if (!(activity instanceof RecyclerFragmentListener)) {
+//            throw new UnsupportedOperationException(
+//                    "Listener is not Implementation.");
+//        } else {
+//            mFragmentListener = (RecyclerFragmentListener) activity;
+//        }
+//        mActivity = activity;
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,5 +73,7 @@ public class RecyclerFragment extends Fragment implements OnRecyclerListener {
     @Override
     public void onRecyclerClicked(View v, int position) {
         //TODO セルクリック処理
+        Log.d("RecyclerFragment", "セルクリック");
+        mFragmentListener.onRecyclerEvent();
     }
 }

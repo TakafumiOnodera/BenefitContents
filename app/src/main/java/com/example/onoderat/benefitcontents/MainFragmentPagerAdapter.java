@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class MainFragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
+public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
     public MainFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -13,7 +13,7 @@ public class MainFragmentPagerAdapter extends android.support.v4.app.FragmentPag
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return PagerViewFlagment.newInstance(android.R.color.holo_blue_bright);
+                return new RecyclerFragment();
             case 1:
                 return PagerViewFlagment.newInstance(android.R.color.holo_green_light);
             case 2:
