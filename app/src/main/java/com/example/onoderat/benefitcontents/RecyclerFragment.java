@@ -18,12 +18,14 @@ public class RecyclerFragment extends Fragment implements OnRecyclerListener {
     private Activity mActivity = null;
     private RecyclerFragmentListener mFragmentListener = null;
 
+    ArrayList<String> mArray = new ArrayList<>();
+
     // RecyclerViewとAdapter
     private RecyclerView mRecyclerView = null;
     private RecyclerAdapter mAdapter = null;
 
     public interface RecyclerFragmentListener {
-        void onRecyclerEvent();
+        void onRecyclerEvent(String cellText);
     }
 
     @Override
@@ -49,19 +51,18 @@ public class RecyclerFragment extends Fragment implements OnRecyclerListener {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<String> array = new ArrayList<>();
-        array.add(getString(R.string.test));
-        array.add("B");
-        array.add("C");
+        mArray = new ArrayList<>();
+        mArray.add(getString(R.string.test));
+        mArray.add("B");
+        mArray.add("C");
 
-        mAdapter = new RecyclerAdapter(mActivity, array, this);
+        mAdapter = new RecyclerAdapter(mActivity, mArray, this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void onRecyclerClicked(View v, int position) {
-        //TODO セルクリック処理
         Log.d("RecyclerFragment", "セルクリック");
-        mFragmentListener.onRecyclerEvent();
+        mFragmentListener.onRecyclerEvent(mArray.get(position));
     }
 }
