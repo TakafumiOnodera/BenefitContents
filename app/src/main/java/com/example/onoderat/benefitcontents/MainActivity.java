@@ -6,11 +6,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements RecyclerFragment.RecyclerFragmentListener {
-    private android.support.v7.widget.Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerFragment.
     }
 
     private void setViews() {
-        toolbar = findViewById(R.id.tool_bar);
+        Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         FragmentManager manager = getSupportFragmentManager();
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerFragment.
 
     @Override
     public void onRecyclerEvent(String cellText) {
-        // TODO アプリが落ちるので確認する
         Intent intent = new Intent(this, SubActivity.class);
         intent.putExtra(getString(R.string.intent_cell_text),cellText);
         startActivity(intent);
